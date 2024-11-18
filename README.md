@@ -46,37 +46,33 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **PROGRAM**
 ```
-/* Program for flipflops and verify its truth table in quartus using Verilog programming.
-Developed by:PRIYANKA R
-RegisterNumber:212223220081
-
-module Srflipflop(q, q_bar, s,r, clk, reset); 
-  input s,r,clk, reset;
+module e6(s, r, clk, rst, q);
+  input s, r, clk, rst;
   output reg q;
-  output q_bar;
- 
-  always@(posedge clk) 
-  begin 
-    if(!reset)       
-	    q <= 0;
-    else 
-  begin
-      case({s,r})       
-	     2'b00: q <= q;    	
-            2'b01: q <= 1'b0;	
-        2'b10: q <= 1'b1;	
-        2'b11: q <= 1'bx;			  					 
+
+  always @(posedge clk or posedge rst)
+ begin
+    if (rst)
+      q <= 0; // Reset the flip-flop
+    else
+ begin
+      case ({s, r}) // S and R control the behavior
+        2'b00: q <= q;    // No change
+        2'b01: q <= 0;    // Reset
+        2'b10: q <= 1;    // Set
+        2'b11: q <= 0;    // Invalid state, typically treated as reset
       endcase
     end
   end
-  assign q_bar = ~q;
 endmodule
 ```
 **RTL LOGIC FOR FLIPFLOPS**
-![WhatsApp Image 2024-10-07 at 11 31 28_9f0d9711](https://github.com/user-attachments/assets/8e1b0ea1-1203-4a25-932c-9069a103ec60)
+![RTL 6 SR ](https://github.com/user-attachments/assets/d92a6761-1568-4dd5-990b-ce2e12a2719c)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
-![WhatsApp Image 2024-10-07 at 11 31 28_9f0d9711](https://github.com/user-attachments/assets/386175ad-3bcb-4225-869d-c2606448b091)
+
+![TIMING RTL SR 6    SAVE](https://github.com/user-attachments/assets/15413d79-0d9a-4076-a26f-9e7eb16acd70)
+
 
 **RESULTS**
 
